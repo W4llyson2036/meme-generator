@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+.container--main{
+    padding: 18px;
+    max-width: 600px;
+    min-width: 200px;
+    margin: 0px auto;
+}
+
+.container--form{
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.button-submit{
+    overflow: hidden;
+    grid-column: span 2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.input-text,
+.button-submit{
+    outline: 0;
+    border: none;
+    padding: 5px;
+    height: 50px;
+    min-width: 20px;
+    font-size: 18px;
+    border-radius: 7px;
+}
+
+.container--image{
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.meme-image{
+    width: 100%;
+    object-fit: cover;
+}
+
+.text-top,
+.text-bottom{
+    overflow: hidden;
+    position: absolute;
+    
+    max-width: 90%;
+    font-size: 2.5em;
+    font-family: Arial;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transform: translateX(-50%);
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000;
+}
+
+.text-top{
+    top: 20px;
+    left: 50%;
+}
+
+.text-bottom{
+    left: 50%;
+    bottom: 20px;
+}
