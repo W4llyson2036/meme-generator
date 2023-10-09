@@ -15,12 +15,12 @@
 
 .button-submit{
     overflow: hidden;
-    grid-column: span 2;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .input-text,
+.button-clean,
 .button-submit{
     outline: 0;
     border: none;

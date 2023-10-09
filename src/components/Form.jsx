@@ -51,6 +51,14 @@ export default function Form(){
         }))
     }
 
+    function cleanInput() {
+        setMemeText(prevTextMeme => ({
+            ...prevTextMeme,
+            textTop: '',
+            textBottom: ''
+        }));
+    }
+
     return(
         <>
             <main className="container--main">
@@ -77,6 +85,10 @@ export default function Form(){
                     
                     <button type="button" className="button-submit" onClick={getNewImageMeme}>
                         Get a new meme image
+                    </button>
+
+                    <button type="button" className="button-clean" onClick={cleanInput}>
+                        clean
                     </button>
                 </form>
 
