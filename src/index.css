@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
-*{
+* {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: Arial, Helvetica;
   color: white;
+  transition: background-color 0.2s ease;
 }

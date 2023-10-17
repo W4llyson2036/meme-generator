@@ -1,18 +1,18 @@
-.container--header{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: purple;
+.container--header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: purple;
 }
 
-.logoMeme{
-    width: 50px;
-    margin-right: 10px;
+.logoMeme {
+  width: 50px;
+  margin-right: 10px;
 }
 
-.title{
-    text-align: center;
-    font-size: max(20px, 3vw);
+.title {
+  text-align: center;
+  font-size: max(20px, 3vw);
 }
