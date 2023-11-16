@@ -7,28 +7,34 @@
   margin: 0px auto;
 }
 
-.container--form {
-  gap: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+.container--input,
+.container--button {
+  gap: 5px;
+  display: flex;
+  margin-block: 7px;
+} 
 
-.button-submit {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.input-text,
-.button-clean,
-.button-submit {
+.input-text-style {
+  flex: 1;
   outline: 0;
-  border: none;
+  border: 1px solid black;
+  height: 50px;
+  min-width: 20px;
+  font-size: 18px;
+  padding: 5px 9px;
+  border-radius: 7px;
+}
+
+.button-style {
+  flex: 1;
+  outline: 0;
+  border: 1px solid black;
   padding: 5px;
   height: 50px;
   min-width: 20px;
   font-size: 18px;
   border-radius: 7px;
+  overflow: hidden;
 }
 
 .container--image {

@@ -16,7 +16,6 @@ header.modeDark {
   display: flex;
   align-items: center;
   justify-content: end;
-  margin-bottom: 10px;
 }
 
 .toggle p {

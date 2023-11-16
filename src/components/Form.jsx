@@ -36,7 +36,7 @@ export default function Form(props) {
     handleResize();
   }, [containerWidth]);
 
-  //access the api to get memes
+  //access the API to get memes
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
       .then((res) => res.json())
@@ -61,11 +61,13 @@ export default function Form(props) {
     }));
   }
 
+  function savaImage() {
+    console.log("new image seved!")
+  }
+
   return (
     <>
-      <main
-        className={`container--main ${props.darkMode ? "modeDark" : false}`}
-      >
+      <main className={`container--main ${props.darkMode ? "modeDark" : false}`}>
         <div className="toggle">
           <p className="toggle-light">light</p>
           <div className="toggle-slider" onClick={props.toggleDarkMode}>
@@ -75,42 +77,50 @@ export default function Form(props) {
         </div>
 
         <form action="#" className="container--form">
-          <input
-            type="text"
-            name="textTop"
-            autoComplete="off"
-            className="input-text"
-            placeholder="type here"
-            onChange={handleChange}
-            value={memeText.textTop}
-          />
+          <div className="container--input">
+            <input
+              type="text"
+              name="textTop"
+              autoComplete="off"
+              className="input-text-style"
+              placeholder="type here"
+              onChange={handleChange}
+              value={memeText.textTop}
+            />
 
-          <input
-            type="text"
-            name="textBottom"
-            autoComplete="off"
-            className="input-text"
-            placeholder="type here"
-            onChange={handleChange}
-            value={memeText.textBottom}
-          />
+            <input
+              type="text"
+              name="textBottom"
+              autoComplete="off"
+              className="input-text-style"
+              placeholder="type here"
+              onChange={handleChange}
+              value={memeText.textBottom}
+            />
+          </div>
 
-          <button
-            type="button"
-            className="button-submit"
-            onClick={getNewImageMeme}
-          >
-            Get a new meme image
-          </button>
+          <div className="container--button">
+            <button
+              type="button"
+              className="button-style"
+              onClick={getNewImageMeme}
+              >
+              Get a new meme image
+            </button>
 
-          <button type="button" className="button-clean" onClick={cleanInput}>
-            clean
-          </button>
+            <button type="button" className="button-style" onClick={cleanInput}>
+              clean
+            </button>
+
+            <button type="button" className="button-style" onClick={savaImage}>
+              save img
+            </button>
+          </div>
         </form>
 
         <div className="container--image">
           <p className="text-top">{memeText.textTop}</p>
-          <img className="meme-image" src={memeText.url} alt="" />
+          <img className="meme-image" src={memeText.url} alt="meme image" />
           <p className="text-bottom">{memeText.textBottom}</p>
         </div>
       </main>
