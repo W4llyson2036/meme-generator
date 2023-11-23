@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .container--main {
-  padding: 18px;
+  padding: 8px;
+  margin-inline: auto;
   max-width: 600px;
   min-width: 200px;
-  margin: 0px auto;
 }
 
 .container--input,
@@ -16,46 +16,45 @@
 
 .input-text-style {
   flex: 1;
-  outline: 0;
-  border: 1px solid black;
   height: 50px;
   min-width: 20px;
-  font-size: 18px;
   padding: 5px 9px;
   border-radius: 7px;
+  font-size: var(--fs-500);
+  border: 1px solid black;
 }
 
 .button-style {
   flex: 1;
-  outline: 0;
-  border: 1px solid black;
   padding: 5px;
   height: 50px;
   min-width: 20px;
-  font-size: 18px;
-  border-radius: 7px;
   overflow: hidden;
+  border-radius: 7px;
+  font-size: var(--fs-500);
+  border: 1px solid black;
 }
 
 .container--image {
-  width: 100%;
-  margin-top: 10px;
   position: relative;
 }
 
 .meme-image {
   width: 100%;
+  border: 2px solid black;
   object-fit: cover;
 }
 
 .text-top,
 .text-bottom {
-  overflow: hidden;
   position: absolute;
-
+  
+  color: white;
   max-width: 90%;
-  font-size: 2.5em;
-  font-family: Arial;
+  overflow: hidden;
+  font-family: var(--ff);
+  font-size: var(--fs-800);
+
   white-space: nowrap;
   text-overflow: ellipsis;
   transform: translateX(-50%);

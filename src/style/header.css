@@ -1,10 +1,14 @@
 .container--header {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 10px;
   background-color: purple;
+}
+
+.container--meme-logo-and-text {
+  display: flex;
+  padding-block: 5px;
+  align-items: center;
+  justify-content: center;
 }
 
 .logoMeme {
@@ -14,5 +18,32 @@
 
 .title {
   text-align: center;
+  font-family: var(--ff);
+  font-weight: var(--fw-semi-bold-600);
   font-size: max(20px, 3vw);
+}
+
+.primary-nav {
+  background-color: rgba(245, 222, 179, 0.322);
+}
+
+.primary-list {
+  display: flex;
+}
+
+.primary-list li {
+  margin-inline: 8px;
+  padding-block: 8px;
+  font-family: var(--ff);
+  font-size: var(--fs-500);
+  font-weight: var(--fw-semi-bold-600);
+}
+
+a {
+  color: white;
+}
+
+.isActive {
+  color: rgb(84, 222, 84);
+  text-decoration: underline;
 }

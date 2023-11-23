@@ -19,8 +19,8 @@ header.modeDark {
 }
 
 .toggle p {
-  font-weight: 600;
-  font-size: 0.625rem;
+  font-size: var(--fs-300);
+  font-weight: var(--fw-semi-bold-600);
 }
 
 .toggle-slider {

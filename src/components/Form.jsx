@@ -1,23 +1,25 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import "../style/Form.css";
-import "../style/darkMode.css";
+import { useState, useEffect, useRef } from "react";
+
+import "../style/Form.css"
+import "../style/darkMode.css"
 
 export default function Form(props) {
+  const divRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [allMemes, setAllMemes] = useState([]);
-  const [memeText, setMemeText] = useState({
+  const [currentMeme, setCurrentMeme] = useState({
+    id: 0,
     textTop: "",
     textBottom: "",
     url: "http://i.imgflip.com/1bij.jpg",
   });
 
-  //update the value of all input
-  function handleChange(Event) {
+  function handleChangeValueOfInput(Event) {
     const { value, name } = Event.target;
 
     if (value.length <= containerWidth / 20 - 4) {
-      setMemeText((prev) => ({
+      setCurrentMeme((prev) => ({
         ...prev,
         [name]: value,
       }));
@@ -26,54 +28,79 @@ export default function Form(props) {
     }
   }
 
-  //adapt the meme container width
+  // Adapt the meme container width
   useEffect(() => {
-    function handleResize() {
-      const WIDTH = document.querySelector(".container--image").offsetWidth;
-      setContainerWidth(WIDTH);
+    const updateMemeContainerWidth = () => {
+      if(divRef.current) {
+        setContainerWidth(divRef.current.offsetWidth);
+      }
     }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-  }, [containerWidth]);
 
-  //access the API to get memes
+    window.addEventListener('resize', updateMemeContainerWidth)
+
+    updateMemeContainerWidth();
+    
+    return () => {
+      window.removeEventListener('resize', updateMemeContainerWidth);
+    }
+  }, []);
+
+  // Accessing the API to get meme
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
       .then((res) => res.json())
       .then((data) => setAllMemes(data.data.memes));
   }, []);
 
-  function getNewImageMeme() {
+  function getNewMemeImageRandomly() {
     const RANDOM_NUMBER = Math.floor(Math.random() * allMemes.length);
     const NEW_URL = allMemes[RANDOM_NUMBER].url;
+    const ID = allMemes[RANDOM_NUMBER].id;
 
-    setMemeText((prevMeme) => ({
+    setCurrentMeme((prevMeme) => ({
       ...prevMeme,
+      id: ID,
       url: NEW_URL,
     }));
   }
 
   function cleanInput() {
-    setMemeText((prevTextMeme) => ({
+    setCurrentMeme((prevTextMeme) => ({
       ...prevTextMeme,
       textTop: "",
       textBottom: "",
     }));
   }
+  
+  let memeList = [];
+  const DATA_FROM_LOCAL_STOROGE = JSON.parse(localStorage.getItem("memeList")) || memeList;
 
-  function savaImage() {
-    console.log("new image seved!")
+  function saveMemeImageAsFavorite() {
+    let currentId = DATA_FROM_LOCAL_STOROGE.findIndex(meme => meme.id === currentMeme.id);
+
+    if(currentId !== -1) {
+      DATA_FROM_LOCAL_STOROGE[currentId] = currentMeme;
+    } else{
+      DATA_FROM_LOCAL_STOROGE.push(currentMeme);
+    }
+    
+    localStorage.setItem("memeList", JSON.stringify(DATA_FROM_LOCAL_STOROGE));
   }
+
+  // localStorage.setItem("memeList", JSON.stringify(memeList));
+  // localStorage.clear();
 
   return (
     <>
       <main className={`container--main ${props.darkMode ? "modeDark" : false}`}>
-        <div className="toggle">
-          <p className="toggle-light">light</p>
-          <div className="toggle-slider" onClick={props.toggleDarkMode}>
-            <div className="toggle-slider-circle"></div>
+        <div>
+          <div className="toggle">
+            <p className="toggle-light">light</p>
+            <div className="toggle-slider" onClick={props.toggleDarkMode}>
+              <div className="toggle-slider-circle"></div>
+            </div>
+            <p className="toggle-dark">dark</p>
           </div>
-          <p className="toggle-dark">dark</p>
         </div>
 
         <form action="#" className="container--form">
@@ -84,8 +111,8 @@ export default function Form(props) {
               autoComplete="off"
               className="input-text-style"
               placeholder="type here"
-              onChange={handleChange}
-              value={memeText.textTop}
+              onChange={handleChangeValueOfInput}
+              value={currentMeme.textTop}
             />
 
             <input
@@ -94,8 +121,8 @@ export default function Form(props) {
               autoComplete="off"
               className="input-text-style"
               placeholder="type here"
-              onChange={handleChange}
-              value={memeText.textBottom}
+              onChange={handleChangeValueOfInput}
+              value={currentMeme.textBottom}
             />
           </div>
 
@@ -103,25 +130,25 @@ export default function Form(props) {
             <button
               type="button"
               className="button-style"
-              onClick={getNewImageMeme}
+              onClick={getNewMemeImageRandomly}
               >
-              Get a new meme image
+              New meme
             </button>
 
             <button type="button" className="button-style" onClick={cleanInput}>
               clean
             </button>
 
-            <button type="button" className="button-style" onClick={savaImage}>
-              save img
+            <button type="button" className="button-style" onClick={saveMemeImageAsFavorite}>
+              add to favorites  
             </button>
           </div>
         </form>
 
-        <div className="container--image">
-          <p className="text-top">{memeText.textTop}</p>
-          <img className="meme-image" src={memeText.url} alt="meme image" />
-          <p className="text-bottom">{memeText.textBottom}</p>
+        <div className="container--image" ref={divRef}>
+          <p className="text-top">{currentMeme.textTop}</p>
+          <img className="meme-image" src={currentMeme.url} alt="meme image" />
+          <p className="text-bottom">{currentMeme.textBottom}</p>
         </div>
       </main>
     </>
