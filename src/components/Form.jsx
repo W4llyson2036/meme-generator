@@ -87,9 +87,6 @@ export default function Form(props) {
     localStorage.setItem("memeList", JSON.stringify(DATA_FROM_LOCAL_STOROGE));
   }
 
-  // localStorage.setItem("memeList", JSON.stringify(memeList));
-  // localStorage.clear();
-
   return (
     <>
       <main className={`container--main ${props.darkMode ? "modeDark" : false}`}>

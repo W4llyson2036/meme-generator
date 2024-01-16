@@ -19,6 +19,17 @@ export default function FavoriteMemeImage() {
 
   let memeElements = null;
 
+  function removeMeme(indexToRemoveMeme) {
+    let newArray = favoriteMeme.filter(item => item.id !== indexToRemoveMeme)
+   
+    setFavoriteMeme(newArray)
+    removeFromLocalStorage(newArray)
+  }
+
+  function removeFromLocalStorage(newArray) {
+    localStorage.setItem('memeList', JSON.stringify(newArray))
+  }  
+
   if (favoriteMeme.length > 0 && renderComponent) {
     memeElements = favoriteMeme.map((meme) => (
       <div className="container--favorite-meme" key={meme.id}>
@@ -27,9 +38,9 @@ export default function FavoriteMemeImage() {
         <p className="text-bottom">{meme.textBottom}</p>
 
         <div className="buttons">
-          <button className="button-favorite">Edit</button>
-          <button className="button-favorite">Download</button>
-          <button className="button-favorite">Remove</button>
+          {/* <button type="button" className="button-favorite">Edit</button>
+          <button className="button-favorite">Download</button> */}
+          <button className="button-favorite remove" onClick={() => removeMeme(meme.id)}>Remove</button>
         </div>
       </div>
     ));
