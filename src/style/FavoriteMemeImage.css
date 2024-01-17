@@ -10,12 +10,6 @@
     position: relative;
     border: 2px solid black;
     background-color: rgba(99, 99, 99, 0.377);
-
-    transition: opacity 4s ease-in-out;
-}
-
-.removed {
-    opacity: 0;
 }
 
 .meme-image-favorite {
